@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vicente Bellot Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --abyss:    #071844;
+      --deep:     #213660;
+      --swamp:    #153629;
+      --swamp-mid:#244835;
+      --moss:     #26533c;
+      --neon:     #368d63;
+      --cyan:     #7eb8d4;
+      --text:     #dde8e2;
+      --muted:    #7a9a8a;
+      --border:   #1e3a2a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--abyss);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(8,13,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      color: var(--neon);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--neon);
+      border-color: var(--moss);
+      background: rgba(45,110,78,0.12);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Viewport grid — the signature element */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(79,195,138,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,195,138,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* Scan-line shimmer */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(79,195,138,0.015) 50%,
+        transparent 100%
+      );
+      animation: scanline 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes scanline {
+      0%   { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--neon);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name span {
+      color: var(--neon);
+    }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    /* ── DISCIPLINE CARDS ── */
+    .discipline-cards {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .disc-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.5rem 2rem;
+      border: 1px solid var(--border);
+      background: rgba(13,21,37,0.6);
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all 0.25s;
+      min-width: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .disc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--neon);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+
+    .disc-card:hover::before { transform: scaleX(1); }
+
+    .disc-card:hover {
+      border-color: var(--moss);
+      background: rgba(26,58,42,0.3);
+      transform: translateY(-3px);
+    }
+
+    .extension {
+      background: rgba(13,21,37,0.6);
+      text-decoration: none;
+      transition: all 0.25s;
+      min-width: 200px;
+    }
+
+    .extension::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--neon);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+
+    .extension:hover::before { transform: scaleX(1); }
+
+    .extension:hover {
+      border-color: var(--moss);
+      background: rgba(26,58,42,0.3);
+      transform: translateY(-3px);
+    }
+
+    .disc-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--neon);
+    }
+
+    .disc-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .disc-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── FEATURED PROJECTS ── */
+    .section {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      background: var(--deep);
+      border-radius: 3px;
+      overflow: hidden;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      border-color: var(--moss);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(79,195,138,0.08);
+    }
+
+    .project-media {
+      aspect-ratio: 16/9;
+      background: var(--swamp);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-media iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .project-media-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--swamp) 0%, var(--swamp-mid) 100%);
+    }
+
+    .placeholder-icon {
+      font-size: 2.5rem;
+      opacity: 0.3;
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      background: rgba(45,110,78,0.2);
+      color: var(--neon);
+      border: 1px solid rgba(45,110,78,0.4);
+    }
+
+    .project-media iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .project-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      color: var(--neon);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--neon); }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── CONTACT STRIP ── */
+    .contact-strip {
+      background: var(--swamp);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 3rem;
+      text-align: center;
+    }
+
+    .contact-strip h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-strip p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 2rem;
+      border: 1px solid var(--neon);
+      color: var(--neon);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      background: transparent;
+    }
+
+    .btn:hover {
+      background: var(--neon);
+      color: var(--abyss);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .section { padding: 4rem 1.5rem; }
+      .disc-card { min-width: 100%; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">VB</a>
+    <!-- <ul class="nav-links"> 
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="programmer.html">Programmer</a></li>
+      <li><a href="graphics.html">Graphics</a></li>
+      <li><a href="techart.html">Tech Art</a></li>
+    </ul>-->
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      
+      <h1 class="hero-name">Vicente<br /><span>Bellot Vila</span></h1>
+      <p class="hero-bio">
+        Game programmer, graphics engineer, and technical artist with a passion for the systems that make worlds feel alive. <br />
+        From custom rendering pipelines to handcrafted landscapes.
+      </p>
+      <div class="discipline-cards">
+        <a class="disc-card" href="programmer.html">
+          <span class="disc-label">Discipline 01</span>
+          <span class="disc-title">Game Programmer</span>
+          <span class="disc-desc">C++, AI systems, game architecture</span>
+        </a>
+        <a class="disc-card" href="graphics.html">
+          <span class="disc-label">Discipline 02</span>
+          <span class="disc-title">Graphics Engineer</span>
+          <span class="disc-desc">Custom engines, rendering pipelines</span>
+        </a>
+        <a class="disc-card" href="techart.html">
+          <span class="disc-label">Discipline 03</span>
+          <span class="disc-title">Technical Artist</span>
+          <span class="disc-desc">Unreal, foliage, landscape, shaders</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS -->
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="projects-grid">
+
+        <!-- Project 1: Graphics Engine -->
+        <div class="project-card">
+          <div class="project-media">
+            <!-- Replace src with your YouTube embed URL: https://www.youtube.com/embed/VIDEO_ID -->
+            <div class="project-media-placeholder">
+              <span class="placeholder-icon">⚙️</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">C++</span>
+              <span class="tag">OpenGL</span>
+              <span class="tag">Engine Dev</span>
+            </div>
+            <h3 class="project-title">Custom Graphics Engine</h3>
+            <p class="project-desc">A rendering engine built from scratch — featuring a custom scene graph, shader pipeline, and real-time lighting system.</p>
+          </div>
+          </a>
+        </div>
+
+        <!-- Project 2: AI Detective -->
+        <div class="project-card">
+            <div class="project-media">
+              <a href="https://www.youtube.com/watch?v=lA7nQ-Qvofg" target="_blank" 
+                onclick="event.stopPropagation()"
+                style="display:block; width:100%; height:100%; position:absolute;">
+                <img 
+                  src="https://img.youtube.com/vi/lA7nQ-Qvofg/hqdefault.jpg" 
+                  alt="Detective AI Agent"
+                  style="width:100%; height:100%; object-fit:cover;" />
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25); transition: background 0.2s;">
+                  <svg width="64" height="48" viewBox="0 0 68 48" fill="none">
+                    <rect width="68" height="48" rx="10" fill="#FF0000" fill-opacity="0.9"/>
+                    <polygon points="27,14 51,24 27,34" fill="white"/>
+                  </svg>
+                </div>
+              </a>
+            </div>
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag">C++</span>
+                <span class="tag">AI / Behaviour</span>
+                <span class="tag">Game Dev</span>
+              </div>
+              <h3 class="project-title">Detective AI Agent</h3>
+              <p class="project-desc">A fully C++ driven AI detective <br />Thorne acts like a life-like investigator, presenting stereotypical behaviour meters towards suspects and making choices based on them.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Project 3: Tech Art -->
+        <div class="project-card">
+          <div class="project-media">
+            <img  style="width:100%; height:100%; object-fit:cover;" src="../Images/Folliage.png" alt="Foliage & Landscape System">
+            <!-- <div class="project-media-placeholder">
+              <span class="placeholder-icon">🌿</span>
+            </div> -->
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Unreal 5</span>
+              <span class="tag">Tech Art</span>
+              <span class="tag">Procedural</span>
+            </div>
+            <h3 class="project-title">Foliage & Landscape System</h3>
+            <p class="project-desc">Procedural foliage generation and custom landscape texture blending in Unreal Engine 5.</p>
+          </div>
+          </a>
+        </div>
+
+        <!-- Project 4: Suction Market -->
+        <div class="project-card">
+            <div class="project-media">
+              <a href="https://www.youtube.com/watch?v=yex7SFDvsDU" target="_blank" 
+                onclick="event.stopPropagation()"
+                style="display:block; width:100%; height:100%; position:absolute;">
+                <img 
+                  src="../Images/Suckadona.jpg" 
+                  alt="Suction Market"
+                  style="width:100%; height:100%; object-fit:cover;" />
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25); transition: background 0.2s;">
+                  <svg width="64" height="48" viewBox="0 0 68 48" fill="none">
+                    <rect width="68" height="48" rx="10" fill="#FF0000" fill-opacity="0.9"/>
+                    <polygon points="27,14 51,24 27,34" fill="white"/>
+                  </svg>
+                </div>
+              </a>
+            </div>
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag">C#</span>
+                <span class="tag">AI / Behaviour</span>
+                <span class="tag">Unity</span>
+                <span class="tag">Game Dev</span>
+              </div>
+              <h3 class="project-title">Suction Market</h3>
+              <p class="project-desc">A C# game in Unity <br />Customers flood your convinience store, with them, smugglers that want to take your goods withought paying.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Project 5: Observer Market -->
+        <div class="project-card">
+            <div class="project-media">
+              <a href="https://youtu.be/ARCAXK1BbUU" target="_blank" 
+                onclick="event.stopPropagation()"
+                style="display:block; width:100%; height:100%; position:absolute;">
+                <img 
+                  src="../Images/Observer.jpg" 
+                  alt="Suction Market"
+                  style="width:100%; height:100%; object-fit:cover;" />
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25); transition: background 0.2s;">
+                  <svg width="64" height="48" viewBox="0 0 68 48" fill="none">
+                    <rect width="68" height="48" rx="10" fill="#FF0000" fill-opacity="0.9"/>
+                    <polygon points="27,14 51,24 27,34" fill="white"/>
+                  </svg>
+                </div>
+              </a>
+            </div>
+            <div class="project-body">
+              <div class="project-tags">
+                <span class="tag">C++</span>
+                <span class="tag">AI / Behaviour</span>
+                <span class="tag">Unreak 5.5.4</span>
+                <span class="tag">Plugins</span>
+              </div>
+              <h3 class="project-title">Observer Market</h3>
+              <p class="project-desc">A C++ game in Unreal <br />As a customer, gather your the items in your shopping list while being observed by an AI<br/> Dont stay to much or you might regret it.</p>
+            </div>
+          </a>
+        </div>
+
+        
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT STRIP -->
+  <div class="contact-strip">
+    <p>Open to full-time roles in game development, graphics engineering, and technical art.</p>
+  </div>
+
+  <footer>
+    <span class="footer-name">Vicente Bellot</span>
+    <div class="footer-links">
+      <a href="https://github.com/VicenteBellot" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/vicente-bellot-vila-56487a318/" target="_blank">LinkedIn</a>
+      <a href="mailto:Vicentebellotvila05@gmail.com">Email</a>
+    </div>
+    <span class="footer-copy">© 2026</span>
+  </footer>
+
+</body>
+</html>
