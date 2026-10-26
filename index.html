@@ -467,7 +467,7 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="index.html">VB</a>
+    <a class="nav-logo" href="index.html">Home</a>
     <!-- <ul class="nav-links"> 
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="programmer.html">Programmer</a></li>
@@ -516,12 +516,22 @@
 
         <!-- Project 1: Graphics Engine -->
         <div class="project-card">
-          <div class="project-media">
-            <!-- Replace src with your YouTube embed URL: https://www.youtube.com/embed/VIDEO_ID -->
-            <div class="project-media-placeholder">
-              <span class="placeholder-icon">⚙️</span>
+            <div class="project-media">
+                <!-- Replace src with your YouTube embed URL: https://www.youtube.com/embed/VIDEO_ID -->
+                <a href="https://www.youtube.com/watch?v=_WSYHW62_ro" target="_blank"
+                   onclick="event.stopPropagation()"
+                   style="display:block; width:100%; height:100%; position:absolute;">
+                    <img src="https://img.youtube.com/vi/_WSYHW62_ro/hqdefault.jpg"
+                         alt="HTML Engine"
+                         style="width:100%; height:100%; object-fit:cover;" />
+                    <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25); transition: background 0.2s;">
+                        <svg width="64" height="48" viewBox="0 0 68 48" fill="none">
+                            <rect width="68" height="48" rx="10" fill="#FF0000" fill-opacity="0.9" />
+                            <polygon points="27,14 51,24 27,34" fill="white" />
+                        </svg>
+                    </div>
+                </a>
             </div>
-          </div>
           <div class="project-body">
             <div class="project-tags">
               <span class="tag">C++</span>
